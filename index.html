@@ -141,16 +141,21 @@
             font-size: clamp(2rem, 5vw, 4rem);
             color: #d4145a;
             margin-bottom: 30px;
-            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 22px rgba(255, 105, 180, 0.35);
+            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 22px rgba(255, 105, 180, 0.35),
+                         0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            padding: 15px 30px;
+            border-radius: 15px;
         }
 
         .input-container {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 40px;
             box-shadow: 0 10px 36px rgba(212, 20, 90, 0.22), 0 2px 10px rgba(0,0,0,0.06);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             text-align: center;
             max-width: 400px;
             width: 100%;
@@ -217,12 +222,12 @@
         }
 
         .denied-container {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 60px 40px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             text-align: center;
             max-width: 500px;
         }
@@ -232,11 +237,15 @@
             font-size: clamp(1.5rem, 4vw, 2.5rem);
             color: #d4145a;
             margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.3), 0 0 25px rgba(255, 255, 255, 0.8),
+                         0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         .denied-container p {
             font-size: 1.1rem;
-            color: #333;
+            color: #222;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
         }
 
         /* Proposal Screen */
@@ -258,8 +267,14 @@
             font-size: clamp(2rem, 6vw, 4.5rem);
             color: #d4145a;
             margin-bottom: 40px;
-            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 28px rgba(255, 105, 180, 0.45);
+            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 28px rgba(255, 105, 180, 0.45),
+                         0 4px 20px rgba(0, 0, 0, 0.6), 0 0 50px rgba(255, 255, 255, 0.9);
             animation: pulse 2s ease-in-out infinite;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            border-radius: 20px;
+            display: inline-block;
         }
 
         @keyframes pulse {
@@ -276,7 +291,9 @@
             margin: 30px 0;
             animation: heartbeat 1.5s ease-in-out infinite;
             display: inline-block;
-            text-shadow: 0 0 12px rgba(255, 105, 180, 0.6), 0 0 28px rgba(212, 20, 90, 0.35);
+            text-shadow: 0 0 12px rgba(255, 105, 180, 0.6), 0 0 28px rgba(212, 20, 90, 0.35),
+                         0 0 50px rgba(255, 255, 255, 0.8), 0 8px 30px rgba(0, 0, 0, 0.6);
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
         }
 
         @keyframes heartbeat {
@@ -401,23 +418,32 @@
             font-size: clamp(2.5rem, 6vw, 5rem);
             color: #d4145a;
             margin-bottom: 20px;
+            text-shadow: 0 3px 15px rgba(212, 20, 90, 0.3), 0 0 30px rgba(255, 105, 180, 0.5),
+                         0 5px 25px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 20px;
+            display: inline-block;
         }
 
         .memory-message {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 40px;
             box-shadow: 0 12px 36px rgba(212, 20, 90, 0.22);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .memory-message p {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #333;
+            color: #222;
             text-align: center;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-weight: 500;
         }
 
         .video-container {
