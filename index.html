@@ -450,6 +450,7 @@
             padding: 15px 30px;
             border-radius: 20px;
             display: inline-block;
+            transition: all 0.5s ease;
         }
 
         .memory-message {
@@ -460,6 +461,17 @@
             margin-bottom: 40px;
             box-shadow: 0 12px 36px rgba(212, 20, 90, 0.22);
             border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .memory-message.minimized {
+            max-height: 0;
+            padding: 0;
+            margin-bottom: 10px;
+            opacity: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
 
         .memory-message p {
@@ -474,6 +486,14 @@
         .video-container {
             margin-bottom: 40px;
             text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .video-container.minimized {
+            max-height: 0;
+            margin-bottom: 0;
+            opacity: 0;
+            overflow: hidden;
         }
 
         .video-container h2 {
@@ -521,6 +541,46 @@
 
         .photo-gallery {
             margin-top: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .photo-gallery.minimized {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .minimize-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff69b4, #d4145a);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(212, 20, 90, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .minimize-toggle.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .minimize-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(212, 20, 90, 0.5);
         }
 
         .photo-gallery h2 {
@@ -857,6 +917,9 @@
 
     <!-- Celebration Animation -->
     <div class="celebration" id="celebration"></div>
+
+    <!-- Minimize/Maximize Toggle Button -->
+    <button class="minimize-toggle" id="minimizeToggle">📖</button>
 
     <!-- Music Control -->
     <div class="music-control" id="musicControl"></div>
@@ -1373,6 +1436,73 @@
             playVideoBtn.style.display = 'none';
             coupleVideo.style.display = 'block';
             coupleVideo.play();
+        });
+
+        // Minimize/Maximize functionality for memory screen content
+        const memoryMessage = document.querySelector('.memory-message');
+        const photoGallery = document.querySelector('.photo-gallery');
+        const videoContainerDiv = document.getElementById('videoContainer');
+        const minimizeToggle = document.getElementById('minimizeToggle');
+        const memoryHeader = document.querySelector('.memory-header');
+        let isMinimized = false;
+
+        // Show toggle button when memory screen is active
+        const observer = new MutationObserver(() => {
+            if (memoryScreen.classList.contains('active')) {
+                setTimeout(() => {
+                    minimizeToggle.classList.add('visible');
+                }, 1000);
+            } else {
+                minimizeToggle.classList.remove('visible');
+            }
+        });
+        observer.observe(memoryScreen, { attributes: true, attributeFilter: ['class'] });
+
+        // Click on message to minimize
+        memoryMessage.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isMinimized) {
+                memoryMessage.classList.add('minimized');
+                photoGallery.classList.add('minimized');
+                if (videoContainerDiv.style.display === 'block') {
+                    videoContainerDiv.classList.add('minimized');
+                }
+                memoryHeader.style.opacity = '0.3';
+                memoryHeader.style.transform = 'scale(0.8)';
+                memoryHeader.style.cursor = 'pointer';
+                minimizeToggle.textContent = '📖';
+                isMinimized = true;
+            }
+        });
+
+        // Function to restore content
+        function restoreContent() {
+            if (isMinimized) {
+                memoryMessage.classList.remove('minimized');
+                photoGallery.classList.remove('minimized');
+                if (videoContainerDiv.style.display === 'block') {
+                    videoContainerDiv.classList.remove('minimized');
+                }
+                memoryHeader.style.opacity = '1';
+                memoryHeader.style.transform = 'scale(1)';
+                memoryHeader.style.cursor = 'default';
+                minimizeToggle.textContent = '📖';
+                isMinimized = false;
+            }
+        }
+
+        // Click toggle button to restore
+        minimizeToggle.addEventListener('click', restoreContent);
+
+        // Click on header to restore
+        memoryHeader.addEventListener('click', restoreContent);
+
+        // Click anywhere on memory screen background to restore
+        memoryScreen.addEventListener('click', (e) => {
+            // Only restore if clicking on the screen background, not on content
+            if (e.target === memoryScreen && isMinimized) {
+                restoreContent();
+            }
         });
 
         // Initialize
