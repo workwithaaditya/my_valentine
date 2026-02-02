@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffc3e1 50%, #ffb3d9 100%);
+            background-size: 200% 200%;
+            animation: bg-shift 18s ease-in-out infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(60% 60% at 50% 30%, rgba(255,255,255,0.22), rgba(255,255,255,0.06) 60%, rgba(212,20,90,0.08) 100%);
+            z-index: 0;
+        }
+
+        @keyframes bg-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Background Slideshow */
+        .bg-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .bg-slide.active {
+            opacity: 1;
+        }
+
+        /* Floating Hearts Background Animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.6;
+            animation: float-up linear infinite;
+            filter: drop-shadow(0 2px 6px rgba(212, 20, 90, 0.35));
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Screen Container */
+        .screen {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        .screen.active {
+            display: flex;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Name Entry Screen */
+        .name-screen {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .name-screen h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: #d4145a;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 22px rgba(255, 105, 180, 0.35);
+        }
+
+        .input-container {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 36px rgba(212, 20, 90, 0.22), 0 2px 10px rgba(0,0,0,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .input-container label {
+            font-size: 1.2rem;
+            color: #d4145a;
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-container input:focus {
+            border-color: #d4145a;
+            box-shadow: 0 0 10px rgba(212, 20, 90, 0.3);
+        }
+
+        .continue-btn {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff69b4, #d4145a);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 20, 90, 0.3);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 20, 90, 0.4);
+        }
+
+        .error-message {
+            margin-top: 20px;
+            color: #d4145a;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        /* Access Denied Screen */
+        .denied-screen {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .denied-container {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .denied-container h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #d4145a;
+            margin-bottom: 20px;
+        }
+
+        .denied-container p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        /* Proposal Screen */
+        .proposal-screen {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .proposal-container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .proposal-container h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 6vw, 4.5rem);
+            color: #d4145a;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 28px rgba(255, 105, 180, 0.45);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .big-heart {
+            font-size: 120px;
+            margin: 30px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            text-shadow: 0 0 12px rgba(255, 105, 180, 0.6), 0 0 28px rgba(212, 20, 90, 0.35);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: scale(1.15);
+            }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .choice-btn {
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff69b4, #d4145a);
+            color: white;
+            box-shadow: 0 10px 24px rgba(212, 20, 90, 0.35), 0 0 22px rgba(255, 105, 180, 0.4);
+            animation: yes-glow 2.8s ease-in-out infinite;
+        }
+
+        .yes-btn:hover {
+            transform: translateY(-3px) scale(1.06);
+            box-shadow: 0 16px 36px rgba(212, 20, 90, 0.45), 0 0 30px rgba(255, 105, 180, 0.55);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #e0e0e0, #b0b0b0);
+            color: #333;
+            position: fixed;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+        .no-btn:hover {
+            transform: scale(0.95);
+        }
+
+        .teasing-text {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: fadeInDown 0.5s ease;
+            text-shadow: 0 1px 8px rgba(212, 20, 90, 0.35);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Memory Screen */
+        .memory-screen {
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .memory-container {
+            max-width: 900px;
+            width: 100%;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .memory-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .memory-header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: #d4145a;
+            margin-bottom: 20px;
+        }
+
+        .memory-message {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 36px rgba(212, 20, 90, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .memory-message p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: center;
+        }
+
+        .video-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .video-container h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #d4145a;
+            margin-bottom: 20px;
+        }
+
+        .video-wrapper {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 12px 36px rgba(212, 20, 90, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-video-btn {
+            margin-bottom: 20px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff69b4, #d4145a);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 20, 90, 0.3);
+        }
+
+        .play-video-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 20, 90, 0.4);
+        }
+
+        .photo-gallery {
+            margin-top: 20px;
+        }
+
+        .photo-gallery h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #d4145a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 10px 26px rgba(212, 20, 90, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(212, 20, 90, 0.32);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Celebration Animation */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .celebration.active {
+            display: block;
+        }
+
+        .confetti {
+            position: absolute;
+            font-size: 30px;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff69b4, #d4145a);
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(212, 20, 90, 0.45), 0 0 20px rgba(255, 105, 180, 0.45);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        .music-control.active {
+            display: flex;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 16px 36px rgba(212, 20, 90, 0.55), 0 0 28px rgba(255, 105, 180, 0.6);
+        }
+
+        .music-control::before {
+            content: '🔊';
+            font-size: 24px;
+        }
+
+        .music-control.muted::before {
+            content: '🔇';
+        }
+
+        @keyframes yes-glow {
+            0%, 100% { box-shadow: 0 10px 24px rgba(212, 20, 90, 0.35), 0 0 22px rgba(255, 105, 180, 0.40); }
+            50% { box-shadow: 0 18px 44px rgba(212, 20, 90, 0.5), 0 0 34px rgba(255, 105, 180, 0.65); }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .choice-btn:focus-visible,
+        .continue-btn:focus-visible,
+        input:focus-visible,
+        .play-video-btn:focus-visible,
+        .music-control:focus-visible {
+            outline: 3px solid rgba(255, 105, 180, 0.6);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .input-container {
+                padding: 30px 20px;
+            }
+
+            .choice-btn {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .music-control {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .music-control::before {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="bg-slideshow" id="bgSlideshow"></div>
+
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Name Entry Screen -->
+    <div class="screen active name-screen" id="nameScreen">
+        <h1>Enter your first name 💖</h1>
+        <div class="input-container">
+            <label for="nameInput">Who are you?</label>
+            <input type="text" id="nameInput" placeholder="Your name..." autocomplete="off">
+            <button class="continue-btn" id="continueBtn">Continue</button>
+            <p class="error-message" id="errorMessage">Please enter your name</p>
+        </div>
+    </div>
+
+    <!-- Access Denied Screen -->
+    <div class="screen denied-screen" id="deniedScreen">
+        <div class="denied-container">
+            <h1>This website is only made for one special person.</h1>
+            <p>Sorry, not you 💔</p>
+        </div>
+    </div>
+
+    <!-- Proposal Screen -->
+    <div class="screen proposal-screen" id="proposalScreen">
+        <div class="proposal-container">
+            <h1>Will you be my Valentine? 💘</h1>
+            <div class="big-heart">💖</div>
+            <div class="button-container">
+                <button class="choice-btn yes-btn" id="yesBtn">Yes 💖</button>
+                <div style="position: relative;">
+                    <span class="teasing-text" id="teasingText">Try again 😏</span>
+                    <button class="choice-btn no-btn" id="noBtn">No 💔</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Screen -->
+    <div class="screen memory-screen" id="memoryScreen">
+        <div class="memory-container">
+            <div class="memory-header">
+                <h1>I knew you'd say yes, Paypay! 💕</h1>
+            </div>
+
+            <div class="memory-message">
+                <p>
+                    From the moment I met you, I knew you were special. Every moment we've shared together has been a treasure,
+                    and I can't imagine my life without you in it. You make every day brighter, every laugh louder, and every
+                    memory sweeter. You are my best friend, my soulmate, and the love of my life. Despite the distance between us,
+                    my love for you only grows stronger each day. You are so sweet, baby, and I cherish every moment with you.
+                    Thank you for saying yes and making me the happiest person alive. Here's to us, to our memories, and to all
+                    the beautiful moments yet to come. I love you more than words can say. Happy Valentine's Day, my love! 💖
+                </p>
+            </div>
+
+            <div class="video-container" id="videoContainer" style="display: none;">
+                <h2>Our Moments Together 💞</h2>
+                <div class="video-wrapper">
+                    <button class="play-video-btn" id="playVideoBtn">Play our video 💞</button>
+                    <video id="coupleVideo" controls style="display: none;">
+                        <source src="video/us.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <div class="photo-gallery">
+                <h2>Our Beautiful Memories 📸</h2>
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Photos will be loaded here if they exist -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebration Animation -->
+    <div class="celebration" id="celebration"></div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl"></div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic">
+        <source src="music/cas.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Configuration
+        const allowedName = "payal";
+        const MUSIC_FILE = "music/cas.mp3";
+        const MUSIC_START_OFFSET = 215; // 3 min 35 sec
+        const MUSIC_TARGET_VOLUME = 0.25;
+        const MUSIC_FADE_DURATION_MS = 5000; // fade-in duration
+        
+        // Elements
+        const nameScreen = document.getElementById('nameScreen');
+        const deniedScreen = document.getElementById('deniedScreen');
+        const proposalScreen = document.getElementById('proposalScreen');
+        const memoryScreen = document.getElementById('memoryScreen');
+        const nameInput = document.getElementById('nameInput');
+        const continueBtn = document.getElementById('continueBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const teasingText = document.getElementById('teasingText');
+        const celebration = document.getElementById('celebration');
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        const videoContainer = document.getElementById('videoContainer');
+        const playVideoBtn = document.getElementById('playVideoBtn');
+        const coupleVideo = document.getElementById('coupleVideo');
+        const galleryGrid = document.getElementById('galleryGrid');
+        const bgSlideshow = document.getElementById('bgSlideshow');
+
+        // Music state
+        let musicPlaying = false;
+        bgMusic.volume = 0; // will fade to target volume
+        bgMusic.loop = false; // manual loop from custom offset
+
+        // Restart from offset when track ends
+        bgMusic.addEventListener('ended', () => {
+            try { bgMusic.currentTime = MUSIC_START_OFFSET; } catch (err) {}
+            bgMusic.play().catch(err => console.log('Replay prevented:', err));
+        });
+
+        function fadeInAudio(audio, targetVolume, durationMs) {
+            audio.volume = 0;
+            const startTime = performance.now();
+            function step(now) {
+                const elapsed = now - startTime;
+                const t = Math.min(1, elapsed / durationMs);
+                audio.volume = t * targetVolume;
+                if (t < 1 && !audio.paused) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Teasing messages for "No" button (personalized for Paypay)
+        const teasingMessages = [
+            "Paypay, galat button! 😏",
+            "Paypay, idhar nahi 😜",
+            "Yes dabao na, Paypay 💖",
+            "Paypay, dil yahan hai 👉💖",
+            "Mujhe pata hai tum haan kahogi, Paypay 😊",
+            "Bas yes kar do, Paypay 🥰",
+            "Arre Paypay, pakad ke dikhao! 🏃",
+            "No mat bolo, Paypay 🥺",
+            "Paypay, pyaar idhar hi hai 💘",
+            "Last chance, Paypay! 😌"
+        ];
+        let teasingIndex = 0;
+        let noBtnInitialized = false;
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💘', '💝'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 7000);
+            }, 500);
+        }
+
+        // Background slideshow (images + optional video)
+        function initBackgroundSlideshow() {
+            const IMAGE_DURATION = 7000; // ms
+            const VIDEO_DURATION = 20000; // ms per segment
+            const slides = [];
+            let current = -1;
+            let timer = null;
+
+            function addImage(src) {
+                const img = document.createElement('img');
+                img.className = 'bg-slide';
+                img.src = src;
+                bgSlideshow.appendChild(img);
+                slides.push({ el: img, type: 'image' });
+            }
+
+            function addVideo(src) {
+                const video = document.createElement('video');
+                video.className = 'bg-slide';
+                video.src = src;
+                video.muted = true;
+                video.playsInline = true;
+                video.preload = 'auto';
+                bgSlideshow.appendChild(video);
+                slides.push({ el: video, type: 'video' });
+            }
+
+            // Try adding known photos (supports jpg, jpeg, png, webp)
+            // Dynamically load all image files from images folder
+            const imageFiles = [
+                'IMG_4021.PNG', 'IMG_4022.PNG', 'IMG_4023.PNG', 'IMG_4024.PNG', 'IMG_4025.PNG',
+                'IMG_4026.PNG', 'IMG_4027.PNG', 'IMG_4028.PNG', 'IMG_4029.PNG', 'IMG_4030.PNG',
+                'IMG_4031.PNG', 'IMG_4032.PNG', 'IMG_4033.PNG', 'IMG_4034.PNG', 'IMG_4035.PNG',
+                'IMG_4036.PNG', 'IMG_4037.PNG', 'IMG_4038.PNG', 'IMG_4039.PNG', 'IMG_4040.PNG',
+                'IMG_4041.PNG', 'IMG_4042.PNG', 'IMG_4043.PNG', 'IMG_4044.PNG', 'IMG_5628.jpg',
+                'IMG_6876.webp', 'IMG_6907.webp', 'IMG_7756.webp', 'IMG_7761.webp',
+                'IMG_8169.webp', 'IMG_8214.webp'
+            ];
+            
+            imageFiles.forEach(filename => {
+                const src = `images/${filename}`;
+                const tester = new Image();
+                tester.onload = () => { addImage(src); };
+                tester.onerror = () => {};
+                tester.src = src;
+            });
+
+            // Try adding optional videos (from video/ or images/ folder)
+            const videoSources = ['video/us.mp4', 'images/us.mp4', 'images/109fc9115e9b411f9fde775127cf6895.mov'];
+            videoSources.forEach(src => {
+                fetch(src)
+                    .then(r => { if (r.ok) addVideo(src); })
+                    .catch(() => {});
+            });
+
+            function showNext() {
+                if (slides.length === 0) return;
+                const prev = current;
+                current = (current + 1) % slides.length;
+                slides.forEach((s, i) => {
+                    if (i === current) {
+                        s.el.classList.add('active');
+                        if (s.type === 'video') {
+                            try { s.el.currentTime = 0; } catch (e) {}
+                            s.el.play().catch(()=>{});
+                        }
+                    } else {
+                        s.el.classList.remove('active');
+                        if (s.type === 'video') {
+                            s.el.pause();
+                        }
+                    }
+                });
+
+                const duration = slides[current].type === 'video' ? VIDEO_DURATION : IMAGE_DURATION;
+                clearTimeout(timer);
+                timer = setTimeout(showNext, duration);
+            }
+
+            // Kick off once we have at least one slide
+            const checkReady = setInterval(() => {
+                if (slides.length > 0) {
+                    clearInterval(checkReady);
+                    showNext();
+                }
+            }, 500);
+        }
+
+        // Start music at custom offset with fade-in
+        function startMusic() {
+            if (musicPlaying) return;
+
+            // Ensure correct source
+            const sourceEl = bgMusic.querySelector('source');
+            if (sourceEl && !sourceEl.src.endsWith(MUSIC_FILE)) {
+                sourceEl.src = MUSIC_FILE;
+                bgMusic.load();
+            }
+
+            const seekAndPlay = () => {
+                try { bgMusic.currentTime = MUSIC_START_OFFSET; } catch (err) {}
+                bgMusic.play().then(() => {
+                    fadeInAudio(bgMusic, MUSIC_TARGET_VOLUME, MUSIC_FADE_DURATION_MS);
+                    musicPlaying = true;
+                    musicControl.classList.add('active');
+                }).catch(err => console.log('Music autoplay prevented:', err));
+            };
+
+            if (bgMusic.readyState >= 1) { // HAVE_METADATA
+                seekAndPlay();
+            } else {
+                bgMusic.addEventListener('loadedmetadata', seekAndPlay, { once: true });
+                bgMusic.load();
+            }
+        }
+
+        // Toggle music
+        musicControl.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicControl.classList.remove('muted');
+            } else {
+                bgMusic.pause();
+                musicControl.classList.add('muted');
+            }
+        });
+
+        // Name validation
+        continueBtn.addEventListener('click', () => {
+            const enteredName = nameInput.value.trim();
+            
+            if (enteredName === '') {
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'Please enter your name';
+                return;
+            }
+
+            if (enteredName.toLowerCase() === allowedName.toLowerCase()) {
+                // Access granted
+                startMusic();
+                nameScreen.classList.remove('active');
+                proposalScreen.classList.add('active');
+                // Initialize No button position after screen transition
+                setTimeout(initializeNoButton, 100);
+            } else {
+                // Access denied
+                nameScreen.classList.remove('active');
+                deniedScreen.classList.add('active');
+            }
+        });
+
+        // Enter key support
+        nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                continueBtn.click();
+            }
+        });
+
+        // Yes button
+        yesBtn.addEventListener('click', () => {
+            startMusic();
+            createCelebration();
+            setTimeout(() => {
+                proposalScreen.classList.remove('active');
+                memoryScreen.classList.add('active');
+                loadMedia();
+            }, 2000);
+        });
+
+        // No button with playful behavior
+        let noClickCount = 0;
+        
+        // Function to move No button away
+        function moveNoButton() {
+            noClickCount++;
+            
+            // Show teasing text
+            teasingText.textContent = teasingMessages[teasingIndex % teasingMessages.length];
+            teasingText.style.display = 'block';
+            teasingIndex++;
+            
+            setTimeout(() => {
+                teasingText.style.display = 'none';
+            }, 2000);
+            
+            // Calculate new position (move far away)
+            const btnRect = noBtn.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Safe zones for button placement
+            const padding = 20;
+            const maxX = viewportWidth - btnRect.width - padding;
+            const maxY = viewportHeight - btnRect.height - padding;
+            
+            // Current position
+            const currentX = btnRect.left;
+            const currentY = btnRect.top;
+            
+            // Calculate new position away from cursor/touch
+            let newX, newY;
+            let attempts = 0;
+            
+            do {
+                newX = Math.random() * maxX;
+                newY = Math.random() * maxY;
+                attempts++;
+            } while (
+                attempts < 10 && 
+                Math.abs(newX - currentX) < 200 && 
+                Math.abs(newY - currentY) < 200
+            );
+            
+            // Apply position with smooth animation
+            noBtn.style.left = Math.max(padding, Math.min(newX, maxX)) + 'px';
+            noBtn.style.top = Math.max(padding, Math.min(newY, maxY)) + 'px';
+            
+            // Make Yes button bigger and more prominent
+            if (noClickCount > 2) {
+                yesBtn.style.transform = 'scale(' + (1 + noClickCount * 0.1) + ')';
+            }
+        }
+        
+        // Initialize No button position on proposal screen
+        function initializeNoButton() {
+            if (!noBtnInitialized && proposalScreen.classList.contains('active')) {
+                const yesRect = yesBtn.getBoundingClientRect();
+                noBtn.style.left = (yesRect.right + 20) + 'px';
+                noBtn.style.top = yesRect.top + 'px';
+                noBtnInitialized = true;
+            }
+        }
+        
+        // Move button away on hover (desktop) and touch (mobile)
+        noBtn.addEventListener('mouseenter', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+        
+        // Prevent actual click
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Create celebration animation
+        function createCelebration() {
+            celebration.classList.add('active');
+            const symbols = ['💖', '💕', '💗', '💘', '💝', '❤️', '💓', '💞'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    celebration.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+            
+            setTimeout(() => {
+                celebration.classList.remove('active');
+            }, 4000);
+        }
+
+        // Load media (photos and video)
+        function loadMedia() {
+            // Check if video exists
+            fetch('video/us.mp4')
+                .then(response => {
+                    if (response.ok) {
+                        videoContainer.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    // Video doesn't exist, that's fine
+                });
+
+            // Load photos (supports jpg, jpeg, png, webp)
+            // Load all image files from images folder
+            const allImages = [
+                'IMG_4021.PNG', 'IMG_4022.PNG', 'IMG_4023.PNG', 'IMG_4024.PNG', 'IMG_4025.PNG',
+                'IMG_4026.PNG', 'IMG_4027.PNG', 'IMG_4028.PNG', 'IMG_4029.PNG', 'IMG_4030.PNG',
+                'IMG_4031.PNG', 'IMG_4032.PNG', 'IMG_4033.PNG', 'IMG_4034.PNG', 'IMG_4035.PNG',
+                'IMG_4036.PNG', 'IMG_4037.PNG', 'IMG_4038.PNG', 'IMG_4039.PNG', 'IMG_4040.PNG',
+                'IMG_4041.PNG', 'IMG_4042.PNG', 'IMG_4043.PNG', 'IMG_4044.PNG', 'IMG_5628.jpg',
+                'IMG_6876.webp', 'IMG_6907.webp', 'IMG_7756.webp', 'IMG_7761.webp',
+                'IMG_8169.webp', 'IMG_8214.webp'
+            ];
+
+            allImages.forEach((filename, i) => {
+                const src = `images/${filename}`;
+                const tester = new Image();
+                tester.onload = () => {
+                    if (added.has(src)) return;
+                    added.add(src);
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.style.animationDelay = (i * 0.1) + 's';
+
+                    const imgElement = document.createElement('img');
+                    imgElement.src = src;
+                    imgElement.alt = `Memory ${i + 1}`;
+
+                    galleryItem.appendChild(imgElement);
+                    galleryGrid.appendChild(galleryItem);
+                };
+                tester.onerror = () => {};
+                tester.src = src;
+            });
+        }
+
+        // Play video button
+        playVideoBtn.addEventListener('click', () => {
+            playVideoBtn.style.display = 'none';
+            coupleVideo.style.display = 'block';
+            coupleVideo.play();
+        });
+
+        // Initialize
+        createFloatingHearts();
+        initBackgroundSlideshow();
+    </script>
+</body>
+</html>
