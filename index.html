@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? 💖</title>
+    <title>Only for Aaditya Negi's Valentine 💖</title>
+    <link rel="icon" type="image/png" href="favicon/IMG_4025-removebg-preview.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -49,6 +50,28 @@
             overflow: hidden;
             z-index: 0;
             pointer-events: none;
+        }
+
+        .bg-slideshow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
+        }
+
+        .bg-slideshow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
         }
 
         .bg-slide {
@@ -139,10 +162,10 @@
         .name-screen h1 {
             font-family: 'Dancing Script', cursive;
             font-size: clamp(2rem, 5vw, 4rem);
-            color: #d4145a;
+            color: #ffffff;
             margin-bottom: 30px;
-            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 22px rgba(255, 105, 180, 0.35),
-                         0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 20px rgba(212, 20, 90, 0.6),
+                         0 0 30px rgba(255, 105, 180, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.9);
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(8px);
             padding: 15px 30px;
@@ -163,10 +186,12 @@
 
         .input-container label {
             font-size: 1.2rem;
-            color: #d4145a;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 20, 90, 0.4), 1px 1px 3px rgba(0, 0, 0, 0.9);
             display: block;
             margin-bottom: 15px;
-            font-weight: 500;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 12px rgba(212, 20, 90, 0.5);
         }
 
         .input-container input {
@@ -235,16 +260,16 @@
         .denied-container h1 {
             font-family: 'Dancing Script', cursive;
             font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: #d4145a;
+            color: #ffffff;
             margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.3), 0 0 25px rgba(255, 255, 255, 0.8),
-                         0 4px 15px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 20px rgba(212, 20, 90, 0.6),
+                         0 0 30px rgba(255, 105, 180, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.9);
         }
 
         .denied-container p {
             font-size: 1.1rem;
-            color: #222;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 20, 90, 0.4), 1px 1px 3px rgba(0, 0, 0, 0.9);
             font-weight: 500;
         }
 
@@ -265,10 +290,10 @@
         .proposal-container h1 {
             font-family: 'Dancing Script', cursive;
             font-size: clamp(2rem, 6vw, 4.5rem);
-            color: #d4145a;
+            color: #ffffff;
             margin-bottom: 40px;
-            text-shadow: 0 2px 10px rgba(212, 20, 90, 0.25), 0 0 28px rgba(255, 105, 180, 0.45),
-                         0 4px 20px rgba(0, 0, 0, 0.6), 0 0 50px rgba(255, 255, 255, 0.9);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 20px rgba(212, 20, 90, 0.6),
+                         0 0 30px rgba(255, 105, 180, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.9);
             animation: pulse 2s ease-in-out infinite;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
@@ -416,10 +441,10 @@
         .memory-header h1 {
             font-family: 'Dancing Script', cursive;
             font-size: clamp(2.5rem, 6vw, 5rem);
-            color: #d4145a;
+            color: #ffffff;
             margin-bottom: 20px;
-            text-shadow: 0 3px 15px rgba(212, 20, 90, 0.3), 0 0 30px rgba(255, 105, 180, 0.5),
-                         0 5px 25px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 255, 255, 0.8);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 20px rgba(212, 20, 90, 0.6),
+                         0 0 30px rgba(255, 105, 180, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.9);
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             padding: 15px 30px;
@@ -440,9 +465,9 @@
         .memory-message p {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #222;
+            color: #ffffff;
             text-align: center;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 20, 90, 0.4), 1px 1px 3px rgba(0, 0, 0, 0.9);
             font-weight: 500;
         }
 
@@ -454,8 +479,9 @@
         .video-container h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
-            color: #d4145a;
+            color: #ffffff;
             margin-bottom: 20px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 20, 90, 0.5);
         }
 
         .video-wrapper {
@@ -500,9 +526,10 @@
         .photo-gallery h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2rem;
-            color: #d4145a;
+            color: #ffffff;
             margin-bottom: 30px;
             text-align: center;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 20, 90, 0.5);
         }
 
         .gallery-grid {
@@ -924,20 +951,25 @@
             }, 500);
         }
 
-        // Background slideshow (images + optional video)
+        // Background slideshow (images + optional video) with device-optimized sorting
         function initBackgroundSlideshow() {
             const IMAGE_DURATION = 7000; // ms
             const VIDEO_DURATION = 20000; // ms per segment
             const slides = [];
+            const pendingImages = [];
             let current = -1;
             let timer = null;
+            
+            // Detect if mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                          || window.innerWidth <= 768;
 
-            function addImage(src) {
+            function addImage(src, aspectRatio) {
                 const img = document.createElement('img');
                 img.className = 'bg-slide';
                 img.src = src;
                 bgSlideshow.appendChild(img);
-                slides.push({ el: img, type: 'image' });
+                slides.push({ el: img, type: 'image', aspectRatio });
             }
 
             function addVideo(src) {
@@ -948,7 +980,7 @@
                 video.playsInline = true;
                 video.preload = 'auto';
                 bgSlideshow.appendChild(video);
-                slides.push({ el: video, type: 'video' });
+                slides.push({ el: video, type: 'video', aspectRatio: 1.78 }); // Assume 16:9 for videos
             }
 
             // Try adding known photos (supports jpg, jpeg, png, webp)
@@ -968,13 +1000,53 @@
                 'IMG_7761.webp', 'IMG_8169.webp', 'IMG_8214.webp'
             ];
             
+            let loadedCount = 0;
+            const totalImages = imageFiles.length;
+            
             imageFiles.forEach(filename => {
                 const src = `images/${filename}`;
                 const tester = new Image();
-                tester.onload = () => { addImage(src); };
-                tester.onerror = () => {};
+                tester.onload = function() {
+                    const aspectRatio = this.width / this.height;
+                    pendingImages.push({ src, aspectRatio });
+                    loadedCount++;
+                    
+                    // Once all images loaded, sort and add them
+                    if (loadedCount === totalImages) {
+                        sortAndAddImages();
+                    }
+                };
+                tester.onerror = () => {
+                    loadedCount++;
+                    if (loadedCount === totalImages) {
+                        sortAndAddImages();
+                    }
+                };
                 tester.src = src;
             });
+            
+            function sortAndAddImages() {
+                // Sort images based on device type
+                // Portrait: aspectRatio < 0.9 (height > width with tolerance)
+                // Landscape: aspectRatio > 1.1 (width > height with tolerance)
+                // Square: 0.9 <= aspectRatio <= 1.1
+                
+                const portrait = pendingImages.filter(img => img.aspectRatio < 0.9);
+                const landscape = pendingImages.filter(img => img.aspectRatio > 1.1);
+                const square = pendingImages.filter(img => img.aspectRatio >= 0.9 && img.aspectRatio <= 1.1);
+                
+                let sortedImages;
+                if (isMobile) {
+                    // Mobile: Portrait first, then square, then landscape
+                    sortedImages = [...portrait, ...square, ...landscape];
+                } else {
+                    // Desktop: Landscape first, then square, then portrait
+                    sortedImages = [...landscape, ...square, ...portrait];
+                }
+                
+                // Add sorted images to slideshow
+                sortedImages.forEach(img => addImage(img.src, img.aspectRatio));
+            }
 
             // Try adding optional videos (from video/ or images/ folder)
             const videoSources = ['video/us.mp4', 'images/us.mp4', 'images/109fc9115e9b411f9fde775127cf6895.mov'];
@@ -1198,8 +1270,12 @@
             }, 4000);
         }
 
-        // Load media (photos and video)
+        // Load media (photos and video) with device-optimized sorting
         function loadMedia() {
+            // Detect if mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                          || window.innerWidth <= 768;
+            
             // Check if video exists
             fetch('video/us.mp4')
                 .then(response => {
@@ -1228,26 +1304,68 @@
                 'IMG_7761.webp', 'IMG_8169.webp', 'IMG_8214.webp'
             ];
 
+            const pendingGalleryImages = [];
+            let loadedCount = 0;
+            const totalImages = allImages.length;
+
             allImages.forEach((filename, i) => {
                 const src = `images/${filename}`;
                 const tester = new Image();
-                tester.onload = () => {
+                tester.onload = function() {
                     if (added.has(src)) return;
-                    added.add(src);
+                    
+                    const aspectRatio = this.width / this.height;
+                    pendingGalleryImages.push({ src, aspectRatio, index: i });
+                    loadedCount++;
+                    
+                    // Once all images loaded, sort and add them
+                    if (loadedCount === totalImages) {
+                        sortAndAddGalleryImages();
+                    }
+                };
+                tester.onerror = () => {
+                    loadedCount++;
+                    if (loadedCount === totalImages) {
+                        sortAndAddGalleryImages();
+                    }
+                };
+                tester.src = src;
+            });
+            
+            function sortAndAddGalleryImages() {
+                // Sort images based on device type
+                // Portrait: aspectRatio < 0.9
+                // Landscape: aspectRatio > 1.1
+                // Square: 0.9 <= aspectRatio <= 1.1
+                
+                const portrait = pendingGalleryImages.filter(img => img.aspectRatio < 0.9);
+                const landscape = pendingGalleryImages.filter(img => img.aspectRatio > 1.1);
+                const square = pendingGalleryImages.filter(img => img.aspectRatio >= 0.9 && img.aspectRatio <= 1.1);
+                
+                let sortedImages;
+                if (isMobile) {
+                    // Mobile: Portrait first, then square, then landscape
+                    sortedImages = [...portrait, ...square, ...landscape];
+                } else {
+                    // Desktop: Landscape first, then square, then portrait
+                    sortedImages = [...landscape, ...square, ...portrait];
+                }
+                
+                // Add sorted images to gallery
+                sortedImages.forEach((imgData, i) => {
+                    added.add(imgData.src);
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
                     galleryItem.style.animationDelay = (i * 0.1) + 's';
 
                     const imgElement = document.createElement('img');
-                    imgElement.src = src;
+                    imgElement.src = imgData.src;
                     imgElement.alt = `Memory ${i + 1}`;
 
                     galleryItem.appendChild(imgElement);
                     galleryGrid.appendChild(galleryItem);
-                };
-                tester.onerror = () => {};
-                tester.src = src;
-            });
+                });
+            }
         }
 
         // Play video button
